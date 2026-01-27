@@ -176,7 +176,7 @@
 
         /* 懸念リスト */
         .concerns-list {
-            background: var(--bg-light);
+            background: #FDF2F2;
             padding: 20px 20px 20px 40px;
             margin: 20px 0;
             list-style: disc;
@@ -282,20 +282,21 @@
         .review-intro { color: #666; margin-bottom: 15px; }
 
         .review-box {
-            background: var(--bg-light);
+            background: #FDF2F2;
             padding: 12px 15px;
             margin: 8px 0;
             font-size: 0.95em;
-            border-left: 4px solid #ddd;
+            border: 2px solid #ddd;
+            border-radius: 5px;
         }
 
         .review-box.good {
-            border-left-color: #90b5ce;
+            border-color: #90b5ce;
             background: #F9FCFF;
         }
 
         .review-box.bad {
-            border-left-color: #f3aca9;
+            border-color: #f3aca9;
             background: #FFFAFC;
         }
 
@@ -388,25 +389,20 @@
 
         .guide-section {
             margin: 30px 0;
-            padding: 20px;
-            background: var(--bg-content);
-            border: 1px solid var(--border-color);
         }
-
-        .guide-section.natural { border-top: 4px solid #4caf50; background: #f9fff9; }
-        .guide-section.medium { border-top: 4px solid var(--secondary-color); background: #f9fcff; }
-        .guide-section.bold { border-top: 4px solid #ff69b4; background: #fff9fc; }
 
         .guide-section h4 {
             margin: 0 0 5px;
             font-size: 0.85em;
             color: #888;
+            padding: 0;
+            border: none;
         }
 
         .guide-section h3 {
             margin: 0 0 20px;
-            padding: 0;
-            border: none;
+            padding-left: 0.8em;
+            border-left: 4px solid #f3aca9;
             font-size: 1.1em;
         }
 
