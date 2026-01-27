@@ -96,97 +96,33 @@
 
         strong { color: var(--primary-color); }
 
-        /* アイキャッチ */
-        .eyecatch {
-            width: 100%;
-            height: 250px;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: #888;
-            font-size: 0.9em;
+
+        /* ユーザーの声（シンプルテキスト） */
+        .user-quote {
+            margin: 15px 0;
+            padding-left: 1em;
         }
-
-        /* SNSシェアボタン */
-        .share-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .share-btn {
-            padding: 6px 12px;
-            border-radius: 4px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.8em;
-        }
-
-        .share-btn.twitter { background: #1da1f2; }
-        .share-btn.facebook { background: #1877f2; }
-        .share-btn.hatena { background: #00a4de; }
-        .share-btn.pocket { background: #ef4056; }
-        .share-btn.line { background: #00c300; }
-
-        /* ユーザー吹き出し（元ページ再現: 背景 #ffddb4、ボーダーなし） */
-        .user-voice {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .user-icon {
-            width: 60px;
-            height: 60px;
-            background: #f0f0f0;
-            border-radius: 50%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-size: 0.6em;
-            overflow: hidden;
-        }
-
-        .user-balloon {
-            position: relative;
-            background: #ffddb4;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 15px;
-            flex: 1;
-        }
-
-        .user-balloon::before {
-            content: "";
-            position: absolute;
-            left: -10px;
-            top: 18px;
-            border-width: 8px 12px 8px 0;
-            border-style: solid;
-            border-color: transparent #ffddb4 transparent transparent;
-        }
-
-        .user-balloon p { margin: 0; }
 
         /* 懸念リスト */
         .concerns-list {
-            background: #FDF2F2;
-            padding: 20px 20px 20px 40px;
+            padding: 0 0 0 25px;
             margin: 20px 0;
             list-style: disc;
         }
 
         .concerns-list li { margin: 10px 0; }
 
+        /* テーブルラッパー（横スクロール対応） */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         /* 比較表 */
         .comparison-table {
             width: 100%;
+            min-width: 500px;
             border-collapse: collapse;
             margin: 20px 0;
             font-size: 0.85em;
@@ -214,18 +150,6 @@
         }
 
         .comparison-table .recommend { background: #fff0f5; }
-
-        .product-img-placeholder {
-            width: 100px;
-            height: 100px;
-            background: #f0f0f0;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7em;
-            color: #888;
-        }
 
         /* 評価記号 - 元ページの色 */
         .eval-good { color: #32cd32; font-weight: bold; } /* ライムグリーン */
@@ -282,45 +206,16 @@
         .review-intro { color: #666; margin-bottom: 15px; }
 
         .review-box {
-            background: #FDF2F2;
+            background: transparent;
             padding: 12px 15px;
             margin: 8px 0;
             font-size: 0.95em;
-            border: 2px solid #ddd;
+            border: 1px solid #ccc;
             border-radius: 5px;
-        }
-
-        .review-box.good {
-            border-color: #90b5ce;
-            background: #F9FCFF;
-        }
-
-        .review-box.bad {
-            border-color: #f3aca9;
-            background: #FFFAFC;
         }
 
         .review-box p { margin: 0; }
         .review-meta { font-size: 0.8em; color: #888; margin-top: 5px; text-align: right; }
-
-        /* デモ画像 */
-        .demo-images {
-            display: flex;
-            gap: 15px;
-            margin: 20px 0;
-            justify-content: center;
-        }
-
-        .demo-placeholder {
-            width: 150px;
-            height: 150px;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75em;
-            color: #666;
-        }
 
         /* 総評・ポイント */
         .summary-box {
@@ -408,6 +303,7 @@
 
         .model-table {
             width: 100%;
+            min-width: 400px;
             border-collapse: collapse;
             background: #fff;
             font-size: 0.85em;
@@ -421,18 +317,6 @@
         }
 
         .model-table thead th { background: var(--accent-orange); }
-
-        .model-img-placeholder {
-            width: 60px;
-            height: 60px;
-            background: #f0f0f0;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.55em;
-            color: #666;
-        }
 
         .volume-bar {
             display: flex;
@@ -482,16 +366,6 @@
 
 <h1>【多機能美顔器】徹底比較！利用者の口コミと失敗しない選び方を紹介</h1>
 
-<div class="eyecatch">[アイキャッチ画像]</div>
-
-<div class="share-buttons">
-    <a href="#" class="share-btn twitter">Twitter</a>
-    <a href="#" class="share-btn facebook">Facebook</a>
-    <a href="#" class="share-btn hatena">はてブ</a>
-    <a href="#" class="share-btn pocket">Pocket</a>
-    <a href="#" class="share-btn line">LINE</a>
-</div>
-
 <p>「エステ」や「美容クリニック」に代わるホームケアアイテムとして、今話題の<strong>「多機能美顔器」</strong>。自宅で手軽にプロ級のケアができるのが特徴です。</p>
 
 <ul class="concerns-list">
@@ -500,19 +374,9 @@
     <li>操作が難しそうだけど、本当に続けられるの？</li>
 </ul>
 
-<div class="user-voice negative">
-    <div class="user-icon">USER</div>
-    <div class="user-balloon">
-        <p>使っても全然効果が感じられない・・・。</p>
-    </div>
-</div>
+<p class="user-quote">「使っても全然効果が感じられない・・・。」</p>
 
-<div class="user-voice positive">
-    <div class="user-icon">USER</div>
-    <div class="user-balloon">
-        <p>毎日使ってたら肌がワントーン明るくなった！</p>
-    </div>
-</div>
+<p class="user-quote">「毎日使ってたら肌がワントーン明るくなった！」</p>
 
 <p>というように意見が分かれています。この差は一体、どこから来るのでしょうか？</p>
 
@@ -525,6 +389,7 @@
 <!-- 比較表セクション -->
 <h2>人気の多機能美顔器3種類を比較！</h2>
 
+<div class="table-wrapper">
 <table class="comparison-table">
     <thead>
         <tr>
@@ -535,12 +400,6 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th>画像</th>
-            <td class="recommend"><div class="product-img-placeholder">[商品画像]</div></td>
-            <td><div class="product-img-placeholder">[商品画像]</div></td>
-            <td><div class="product-img-placeholder">[商品画像]</div></td>
-        </tr>
         <tr>
             <th>価格</th>
             <td class="recommend">29,800円</td>
@@ -597,6 +456,7 @@
         </tr>
     </tbody>
 </table>
+</div>
 
 <!-- おすすめセクション -->
 <h2>おすすめは名実ともにNo.1の「LUMIFACE」</h2>
@@ -610,17 +470,17 @@
 <h4>簡単な操作性</h4>
 <p class="review-intro">多くのユーザーが操作の手軽さを評価しています。</p>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「簡単に操作でき、片付けも楽でした。慣れるまで振動の強さに違和感がありましたが、すぐに慣れました。」</p>
     <p class="review-meta">（40代・女性）</p>
 </div>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「使い方に少しコツはいるけれど、慣れたらとても楽！時短スキンケアに最適です。」</p>
     <p class="review-meta">（50代・女性）</p>
 </div>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「手でやるより断然浸透が違う！毎日のケアが楽しくなって、もう手放せません。」</p>
     <p class="review-meta">（40代・女性）</p>
 </div>
@@ -628,17 +488,17 @@
 <h4>効果の実感</h4>
 <p class="review-intro">ナチュラルな効果で、やりすぎにならない点が好評です。</p>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「普段エステに行けない私でも自宅で手軽にケアできました！肌のハリが出て嬉しいです。」</p>
     <p class="review-meta">（40代・女性）</p>
 </div>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「派手な変化ではないけど、でもしっかり肌が引き締まる感じ。エステ通いを卒業できるかも！」</p>
     <p class="review-meta">（50代・女性）</p>
 </div>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「自然なリフトアップ効果で、顔のラインがすっきり見えます。」</p>
     <p class="review-meta">（30代・女性）</p>
 </div>
@@ -646,17 +506,17 @@
 <h4>ケアの時短</h4>
 <p class="review-intro">毎晩のスキンケアが楽になると多くの人が実感。</p>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「パックをしなくても美容液がしっかり浸透するので、スキンケアが時短できます！」</p>
     <p class="review-meta">（40代・女性）</p>
 </div>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「マッサージもいらないから、夜のケアが格段に楽になりました。」</p>
     <p class="review-meta">（50代・女性）</p>
 </div>
 
-<div class="review-box good">
+<div class="review-box">
     <p>「外出先で肌荒れが心配だったけど、毎日使っていたら安定してきて安心。」</p>
     <p class="review-meta">（30代・女性）</p>
 </div>
@@ -666,12 +526,12 @@
 <h4>操作に慣れが必要</h4>
 <p class="review-intro">初めて使う人は、操作にコツが必要と感じる場合が多いです。</p>
 
-<div class="review-box bad">
+<div class="review-box">
     <p>「慣れるまでは適切なモード選びが難しい。でも練習すれば上手くできそう。」</p>
     <p class="review-meta">（50代・女性）</p>
 </div>
 
-<div class="review-box bad">
+<div class="review-box">
     <p>「当てる角度が難しくて、最初は時間がかかった。練習あるのみ！」</p>
     <p class="review-meta">（40代・女性）</p>
 </div>
@@ -679,12 +539,12 @@
 <h4>効果に個人差がある</h4>
 <p class="review-intro">肌質によっては効果を感じにくいという声も。</p>
 
-<div class="review-box bad">
+<div class="review-box">
     <p>「敏感肌なので最初は刺激を感じることがあるので、弱めモードで使っています。」</p>
     <p class="review-meta">（40代・女性）</p>
 </div>
 
-<div class="review-box bad">
+<div class="review-box">
     <p>「使うのは簡単だけど、効果を実感するまで少し時間がかかった。」</p>
     <p class="review-meta">（50代・女性）</p>
 </div>
@@ -692,12 +552,12 @@
 <h4>モード選びが難しい</h4>
 <p class="review-intro">モードやレベルの選択が難しいと感じる人も。</p>
 
-<div class="review-box bad">
+<div class="review-box">
     <p>「思っていたより多機能だったので、もう少しシンプルなものでも良かったかも。」</p>
     <p class="review-meta">（40代・女性）</p>
 </div>
 
-<div class="review-box bad">
+<div class="review-box">
     <p>「肌質に合わせるのが難しく、少し調整が必要だった。」</p>
     <p class="review-meta">（50代・女性）</p>
 </div>
@@ -709,11 +569,6 @@
 <p>特に、ケアの時短効果や、自宅でエステ級のケアができる使いやすさが支持されています。</p>
 
 <p>一方で、操作にコツがいるため、慣れるまでの練習が必要という意見も多く見られました。</p>
-
-<div class="demo-images">
-    <div class="demo-placeholder">[使用方法<br>デモGIF 1]</div>
-    <div class="demo-placeholder">[使用方法<br>デモGIF 2]</div>
-</div>
 
 <p>また、効果の個人差やモード選びに関する悩みもありました。</p>
 
@@ -734,19 +589,9 @@
 <!-- 選び方ガイド -->
 <h2>私にピッタリなLUMIFACEのシリーズはどれ？</h2>
 
-<div class="user-voice negative">
-    <div class="user-icon">USER</div>
-    <div class="user-balloon">
-        <p>美顔器のパワーが強すぎて肌に合わなかった・・・。</p>
-    </div>
-</div>
+<p class="user-quote">「美顔器のパワーが強すぎて肌に合わなかった・・・。」</p>
 
-<div class="user-voice negative">
-    <div class="user-icon">USER</div>
-    <div class="user-balloon">
-        <p>思ってた機能と違っててガッカリ・・・。</p>
-    </div>
-</div>
+<p class="user-quote">「思ってた機能と違っててガッカリ・・・。」</p>
 
 <p>という失敗をしないためには、モードやパワーの違いを把握しておくことが重要。</p>
 
@@ -765,11 +610,11 @@
     <h4>日常使い、敏感肌、初心者向け</h4>
     <h3>ベーシックケアのあなたには・・・</h3>
 
+    <div class="table-wrapper">
     <table class="model-table">
         <thead>
             <tr>
                 <th>型番</th>
-                <th>画像</th>
                 <th>出力（mA）</th>
                 <th>重量（g）</th>
                 <th>パワー</th>
@@ -778,7 +623,6 @@
         <tbody>
             <tr>
                 <td><strong>LF-100 Lite White</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>50〜100</td>
                 <td>95</td>
                 <td>
@@ -793,7 +637,6 @@
             </tr>
             <tr>
                 <td><strong>LF-100P Lite Pink</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>50〜100</td>
                 <td>95</td>
                 <td>
@@ -820,11 +663,11 @@
     <h4>週末ケア、エイジングケア、バランス重視</h4>
     <h3>スタンダードケアのあなたには・・・</h3>
 
+    <div class="table-wrapper">
     <table class="model-table">
         <thead>
             <tr>
                 <th>型番</th>
-                <th>画像</th>
                 <th>出力（mA）</th>
                 <th>重量（g）</th>
                 <th>パワー</th>
@@ -833,7 +676,6 @@
         <tbody>
             <tr>
                 <td><strong>LF-300 Standard Silver</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>80〜150</td>
                 <td>120</td>
                 <td>
@@ -848,7 +690,6 @@
             </tr>
             <tr>
                 <td><strong>LF-300G Standard Gold</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>80〜150</td>
                 <td>120</td>
                 <td>
@@ -863,7 +704,6 @@
             </tr>
             <tr>
                 <td><strong>LF-300B Standard Black</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>80〜150</td>
                 <td>120</td>
                 <td>
@@ -878,7 +718,6 @@
             </tr>
             <tr>
                 <td><strong>LF-350 Standard Plus</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>80〜180</td>
                 <td>125</td>
                 <td>
@@ -893,7 +732,6 @@
             </tr>
             <tr>
                 <td><strong>LF-350R Standard Rose</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>80〜180</td>
                 <td>125</td>
                 <td>
@@ -920,11 +758,11 @@
     <h4>本格ケア、集中ケア、プロ仕様</h4>
     <h3>プレミアムケアのあなたには・・・</h3>
 
+    <div class="table-wrapper">
     <table class="model-table">
         <thead>
             <tr>
                 <th>型番</th>
-                <th>画像</th>
                 <th>出力（mA）</th>
                 <th>重量（g）</th>
                 <th>パワー</th>
@@ -933,7 +771,6 @@
         <tbody>
             <tr>
                 <td><strong>LF-500 Pro Silver</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>100〜200</td>
                 <td>150</td>
                 <td>
@@ -948,7 +785,6 @@
             </tr>
             <tr>
                 <td><strong>LF-500G Pro Gold</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>100〜200</td>
                 <td>150</td>
                 <td>
@@ -963,7 +799,6 @@
             </tr>
             <tr>
                 <td><strong>LF-500B Pro Black</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>100〜200</td>
                 <td>150</td>
                 <td>
@@ -978,7 +813,6 @@
             </tr>
             <tr>
                 <td><strong>LF-500RG Pro RoseGold</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>100〜200</td>
                 <td>150</td>
                 <td>
@@ -993,7 +827,6 @@
             </tr>
             <tr>
                 <td><strong>LF-550 Pro Max</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>100〜250</td>
                 <td>160</td>
                 <td>
@@ -1008,7 +841,6 @@
             </tr>
             <tr>
                 <td><strong>LF-550W Pro Max White</strong></td>
-                <td><div class="model-img-placeholder">[画像]</div></td>
                 <td>100〜250</td>
                 <td>160</td>
                 <td>
