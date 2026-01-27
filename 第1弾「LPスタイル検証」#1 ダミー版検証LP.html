@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【多機能美顔器】徹底比較！利用者の口コミと失敗しない選び方を紹介</title>
+    <style>
+        /* 元ページの配色を完全再現 */
+        :root {
+            --primary-color: #e60033;
+            --primary-border: #b94d4d;
+            --secondary-color: #87CEEB;
+            --accent-orange: #ffddb4;
+            --text-dark: #333;
+            --text-blue: #0095d9;
+            --link-color: #1558d6;
+            --link-hover: #b52626;
+            --bg-page: #f4f5f7;
+            --bg-content: #fff;
+            --bg-light: #f5f5f5;
+            --border-color: #eee;
+            --border-blue: #90b5ce;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background: var(--bg-page);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--bg-content);
+        }
+
+        a { color: var(--link-color); }
+        a:hover { color: var(--link-hover); }
+
+        /* 黄色マーカー */
+        .marker-yellow {
+            background: linear-gradient(transparent 60%, #fff799 60%);
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        /* h2: バルーンスタイル（元ページ tc-pink テーマ再現） */
+        h2 {
+            font-size: 1.3em;
+            margin: 2em 0 1em;
+            color: #fff;
+            background: #f3aca9;
+            padding: 0.6em 1em;
+            position: relative;
+            border-radius: 5px;
+        }
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 25px;
+            border-width: 10px 10px 0 10px;
+            border-style: solid;
+            border-color: #f3aca9 transparent transparent transparent;
+        }
+
+        /* h3: 左ボーダースタイル */
+        h3 {
+            font-size: 1.15em;
+            margin: 1.5em 0 0.8em;
+            color: #333333;
+            padding-left: 0.8em;
+            border-left: 4px solid #f3aca9;
+        }
+
+        /* h4: 下ボーダースタイル */
+        h4 {
+            font-size: 1em;
+            margin: 1.2em 0 0.6em;
+            color: #333333;
+            padding-bottom: 0.4em;
+            border-bottom: 2px solid #f3aca9;
+        }
+
+        strong { color: var(--primary-color); }
+
+        /* SNSシェアボタン */
+        .share-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8em;
+        }
+
+        .share-btn.twitter { background: #1da1f2; }
+        .share-btn.facebook { background: #1877f2; }
+        .share-btn.hatena { background: #00a4de; }
+        .share-btn.pocket { background: #ef4056; }
+        .share-btn.line { background: #00c300; }
+
+        /* ユーザーの声（シンプルテキスト） */
+        .user-quote {
+            margin: 15px 0;
+            padding-left: 1em;
+        }
+
+        /* 懸念リスト */
+        .concerns-list {
+            padding: 0 0 0 25px;
+            margin: 20px 0;
+            list-style: disc;
+        }
+
+        .concerns-list li { margin: 10px 0; }
+
+        /* 比較表 */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.85em;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .comparison-table thead th {
+            background: var(--secondary-color);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .comparison-table tbody th {
+            background: var(--bg-light);
+            text-align: left;
+            width: 90px;
+            font-weight: normal;
+        }
+
+        .comparison-table .recommend { background: #fff0f5; }
+
+        /* 評価記号 - 元ページの色 */
+        .eval-good { color: #32cd32; font-weight: bold; } /* ライムグリーン */
+        .eval-ok { color: #32cd32; }
+        .eval-bad { color: #ff69b4; } /* ピンク */
+        .eval-ng { color: #ff69b4; }
+
+        /* CTAボタン - 元ページ完全再現 */
+        .cta-wrapper {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .cta-catch {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            border: 2px solid var(--primary-border);
+            color: #fff;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background: #cc002b;
+            color: #fff;
+        }
+
+        .rakuten-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            border: 1px solid var(--primary-border);
+            color: #fff;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.85em;
+        }
+
+        .rakuten-btn:hover {
+            background: #cc002b;
+            color: #fff;
+        }
+
+        /* 口コミ */
+        .review-intro { color: #666; margin-bottom: 15px; }
+
+        .review-box {
+            background: transparent;
+            padding: 12px 15px;
+            margin: 8px 0;
+            font-size: 0.95em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .review-box p { margin: 0; }
+        .review-meta { font-size: 0.8em; color: #888; margin-top: 5px; text-align: right; }
+
+        /* 総評・ポイント */
+        .summary-box {
+            background: var(--bg-light);
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .point-list {
+            background: var(--bg-light);
+            padding: 15px 15px 15px 35px;
+            margin: 20px 0;
+            list-style: disc;
+        }
+
+        .point-list li { margin: 8px 0; }
+
+        /* 見出し付きボックス（黄緑 #c3d825） */
+        .titled-box {
+            position: relative;
+            margin: 30px 0 20px;
+            padding: 25px 20px 15px;
+            border: 2px solid #c3d825;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .titled-box-title {
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: #c3d825;
+            color: #fff;
+            padding: 3px 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        .titled-box ul {
+            margin: 0;
+            padding-left: 25px;
+            list-style: disc;
+        }
+
+        .titled-box li {
+            margin: 8px 0;
+        }
+
+        /* 選び方ガイド */
+        .guide-intro { margin: 20px 0; }
+
+        .makeup-types {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .makeup-type {
+            background: var(--accent-orange);
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .guide-section {
+            margin: 30px 0;
+        }
+
+        .guide-section h4 {
+            margin: 0 0 5px;
+            font-size: 0.85em;
+            color: #888;
+            padding: 0;
+            border: none;
+        }
+
+        .guide-section h3 {
+            margin: 0 0 20px;
+            padding-left: 0.8em;
+            border-left: 4px solid #f3aca9;
+            font-size: 1.1em;
+        }
+
+        .model-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 0.85em;
+        }
+
+        .model-table th,
+        .model-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .model-table thead th { background: var(--accent-orange); }
+
+        .volume-bar {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+        }
+
+        .volume-bar span {
+            width: 12px;
+            height: 12px;
+            background: #ddd;
+        }
+
+        .volume-bar span.filled { background: var(--primary-color); }
+
+        /* フッター - 元ページ完全再現 */
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #333333;
+            font-size: 0.8em;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        footer a { color: #ffffff; }
+
+        /* ポートフォリオラベル */
+        .portfolio-label {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.75);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.7em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="portfolio-label">※ポートフォリオ用ダミーLP</div>
+
+<div class="container">
+
+<h1>【多機能美顔器】徹底比較！利用者の口コミと失敗しない選び方を紹介</h1>
+
+<div class="share-buttons">
+    <a href="#" class="share-btn twitter">Twitter</a>
+    <a href="#" class="share-btn facebook">Facebook</a>
+    <a href="#" class="share-btn hatena">はてブ</a>
+    <a href="#" class="share-btn pocket">Pocket</a>
+    <a href="#" class="share-btn line">LINE</a>
+</div>
+
+<p>「エステ」や「美容クリニック」に代わるホームケアアイテムとして、今話題の<strong>「多機能美顔器」</strong>。自宅で手軽にプロ級のケアができるのが特徴です。</p>
+
+<ul class="concerns-list">
+    <li>本当に自宅ケアでエステ級の効果が得られるの？</li>
+    <li>自分の肌悩みに合うものはあるの？</li>
+    <li>操作が難しそうだけど、本当に続けられるの？</li>
+</ul>
+
+<p class="user-quote">「使っても全然効果が感じられない・・・。」</p>
+
+<p class="user-quote">「毎日使ってたら肌がワントーン明るくなった！」</p>
+
+<p>というように意見が分かれています。この差は一体、どこから来るのでしょうか？</p>
+
+<p>実は、ネガティブな感想を言っている人は<strong>選び方を間違えているだけ</strong>の可能性が高いです。</p>
+
+<p>逆の言い方をすると、<span class="marker-yellow">「自分に合った多機能美顔器の選び方」さえ押さえておけば、これほど時短できて便利なアイテムはない</span>ということです。</p>
+
+<p>このページでは、<strong>多機能美顔器選びで失敗しないための選び方</strong>について説明しますので、参考にしてください。</p>
+
+<!-- 比較表セクション -->
+<h2>人気の多機能美顔器3種類を比較！</h2>
+
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th></th>
+            <th class="recommend">LUMIFACE Pro</th>
+            <th>マルチフェイス EX</th>
+            <th>ビューティーリフト 5in1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>価格</th>
+            <td class="recommend">29,800円</td>
+            <td>24,800円</td>
+            <td>35,000円</td>
+        </tr>
+        <tr>
+            <th>モードの種類</th>
+            <td class="recommend"><span class="eval-good">6種 ◎</span></td>
+            <td><span class="eval-ok">4種 ○</span></td>
+            <td><span class="eval-bad">5種 △</span></td>
+        </tr>
+        <tr>
+            <th>ヘッドの素材</th>
+            <td class="recommend">医療グレードチタン合金</td>
+            <td>記載なし</td>
+            <td>記載なし</td>
+        </tr>
+        <tr>
+            <th>主な技術</th>
+            <td class="recommend">トリプルウェーブ技術</td>
+            <td>記載なし</td>
+            <td>記載なし</td>
+        </tr>
+        <tr>
+            <th>サポート</th>
+            <td class="recommend"><span class="eval-good">あり ◎</span></td>
+            <td><span class="eval-ng">なし ✕</span></td>
+            <td><span class="eval-ng">なし ✕</span></td>
+        </tr>
+        <tr>
+            <th>注意事項</th>
+            <td class="recommend">類似品・模倣品が多いので必ず公式から購入</td>
+            <td>情報が少なく、詳細不明</td>
+            <td>「5機能搭載」と記載があるが実際は「3機能のみ」</td>
+        </tr>
+        <tr>
+            <th>特徴</th>
+            <td class="recommend">公式正規品 国内発送</td>
+            <td>不明</td>
+            <td>不明</td>
+        </tr>
+        <tr>
+            <th>保証期間</th>
+            <td class="recommend">2年</td>
+            <td>1年</td>
+            <td>6ヶ月</td>
+        </tr>
+        <tr>
+            <th>購入</th>
+            <td class="recommend"><a href="#" class="rakuten-btn">楽天市場</a></td>
+            <td><a href="#" class="rakuten-btn">楽天市場</a></td>
+            <td><a href="#" class="rakuten-btn">楽天市場</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- おすすめセクション -->
+<h2>おすすめは名実ともにNo.1の「LUMIFACE」</h2>
+
+<p>多機能美顔器と言えばやっぱり「LUMIFACE」。知名度、利用者数、評判ともにNo.1の定番商品です。</p>
+
+<p>ここでは、そんなLUMIFACEの気になる口コミを紹介します。</p>
+
+<h3>良い口コミ</h3>
+
+<h4>簡単な操作性</h4>
+<p class="review-intro">多くのユーザーが操作の手軽さを評価しています。</p>
+
+<div class="review-box">
+    <p>「簡単に操作でき、片付けも楽でした。慣れるまで振動の強さに違和感がありましたが、すぐに慣れました。」</p>
+    <p class="review-meta">（40代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「使い方に少しコツはいるけれど、慣れたらとても楽！時短スキンケアに最適です。」</p>
+    <p class="review-meta">（50代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「手でやるより断然浸透が違う！毎日のケアが楽しくなって、もう手放せません。」</p>
+    <p class="review-meta">（40代・女性）</p>
+</div>
+
+<h4>効果の実感</h4>
+<p class="review-intro">ナチュラルな効果で、やりすぎにならない点が好評です。</p>
+
+<div class="review-box">
+    <p>「普段エステに行けない私でも自宅で手軽にケアできました！肌のハリが出て嬉しいです。」</p>
+    <p class="review-meta">（40代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「派手な変化ではないけど、でもしっかり肌が引き締まる感じ。エステ通いを卒業できるかも！」</p>
+    <p class="review-meta">（50代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「自然なリフトアップ効果で、顔のラインがすっきり見えます。」</p>
+    <p class="review-meta">（30代・女性）</p>
+</div>
+
+<h4>ケアの時短</h4>
+<p class="review-intro">毎晩のスキンケアが楽になると多くの人が実感。</p>
+
+<div class="review-box">
+    <p>「パックをしなくても美容液がしっかり浸透するので、スキンケアが時短できます！」</p>
+    <p class="review-meta">（40代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「マッサージもいらないから、夜のケアが格段に楽になりました。」</p>
+    <p class="review-meta">（50代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「外出先で肌荒れが心配だったけど、毎日使っていたら安定してきて安心。」</p>
+    <p class="review-meta">（30代・女性）</p>
+</div>
+
+<h3>悪い口コミ</h3>
+
+<h4>操作に慣れが必要</h4>
+<p class="review-intro">初めて使う人は、操作にコツが必要と感じる場合が多いです。</p>
+
+<div class="review-box">
+    <p>「慣れるまでは適切なモード選びが難しい。でも練習すれば上手くできそう。」</p>
+    <p class="review-meta">（50代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「当てる角度が難しくて、最初は時間がかかった。練習あるのみ！」</p>
+    <p class="review-meta">（40代・女性）</p>
+</div>
+
+<h4>効果に個人差がある</h4>
+<p class="review-intro">肌質によっては効果を感じにくいという声も。</p>
+
+<div class="review-box">
+    <p>「敏感肌なので最初は刺激を感じることがあるので、弱めモードで使っています。」</p>
+    <p class="review-meta">（40代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「使うのは簡単だけど、効果を実感するまで少し時間がかかった。」</p>
+    <p class="review-meta">（50代・女性）</p>
+</div>
+
+<h4>モード選びが難しい</h4>
+<p class="review-intro">モードやレベルの選択が難しいと感じる人も。</p>
+
+<div class="review-box">
+    <p>「思っていたより多機能だったので、もう少しシンプルなものでも良かったかも。」</p>
+    <p class="review-meta">（40代・女性）</p>
+</div>
+
+<div class="review-box">
+    <p>「肌質に合わせるのが難しく、少し調整が必要だった。」</p>
+    <p class="review-meta">（50代・女性）</p>
+</div>
+
+<h3>総評</h3>
+
+<p>LUMIFACEの多機能美顔器は、操作の手軽さと自然な効果で高評価を得ています。</p>
+
+<p>特に、ケアの時短効果や、自宅でエステ級のケアができる使いやすさが支持されています。</p>
+
+<p>一方で、操作にコツがいるため、慣れるまでの練習が必要という意見も多く見られました。</p>
+
+<p>また、効果の個人差やモード選びに関する悩みもありました。</p>
+
+<div class="titled-box">
+    <span class="titled-box-title">購入を検討する際の注意ポイント</span>
+    <ul>
+        <li>操作には少し練習が必要だけど、慣れれば簡単！</li>
+        <li>敏感肌の方は、まず弱めモードから始めると安心！</li>
+        <li>乾燥が気になる日は保湿ケアを併用！</li>
+    </ul>
+</div>
+
+<div class="cta-wrapper">
+    <div class="cta-catch">＼初心者サポート付き。安心の公式ショップ／</div>
+    <a href="#" class="cta-button">LUMIFACE公式ショップ楽天市場店</a>
+</div>
+
+<!-- 選び方ガイド -->
+<h2>私にピッタリなLUMIFACEのシリーズはどれ？</h2>
+
+<p class="user-quote">「美顔器のパワーが強すぎて肌に合わなかった・・・。」</p>
+
+<p class="user-quote">「思ってた機能と違っててガッカリ・・・。」</p>
+
+<p>という失敗をしないためには、モードやパワーの違いを把握しておくことが重要。</p>
+
+<p>LUMIFACEには数多くの種類があるのでどれを選べばいいか迷ってしまいがちですが、ここでその違いと選び方をおさえておきましょう。</p>
+
+<div class="makeup-types">
+    <span class="makeup-type">ベーシックケア</span>
+    <span class="makeup-type">スタンダードケア</span>
+    <span class="makeup-type">プレミアムケア</span>
+</div>
+
+<p>の3つのケアタイプごとに、<strong>「出力」「重量」「機能数」</strong>の違いを見ていきます。</p>
+
+<!-- ナチュラルケア -->
+<div class="guide-section natural">
+    <h4>日常使い、敏感肌、初心者向け</h4>
+    <h3>ベーシックケアのあなたには・・・</h3>
+
+    <table class="model-table">
+        <thead>
+            <tr>
+                <th>型番</th>
+                <th>出力（mA）</th>
+                <th>重量（g）</th>
+                <th>パワー</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>LF-100 Lite White</strong></td>
+                <td>50〜100</td>
+                <td>95</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-100P Lite Pink</strong></td>
+                <td>50〜100</td>
+                <td>95</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="cta-wrapper">
+    <div class="cta-catch">＼安心の公式ショップ／</div>
+    <a href="#" class="cta-button">LUMIFACE公式ショップ楽天市場店</a>
+</div>
+
+<!-- スタンダードケア -->
+<div class="guide-section medium">
+    <h4>週末ケア、エイジングケア、バランス重視</h4>
+    <h3>スタンダードケアのあなたには・・・</h3>
+
+    <table class="model-table">
+        <thead>
+            <tr>
+                <th>型番</th>
+                <th>出力（mA）</th>
+                <th>重量（g）</th>
+                <th>パワー</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>LF-300 Standard Silver</strong></td>
+                <td>80〜150</td>
+                <td>120</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-300G Standard Gold</strong></td>
+                <td>80〜150</td>
+                <td>120</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-300B Standard Black</strong></td>
+                <td>80〜150</td>
+                <td>120</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-350 Standard Plus</strong></td>
+                <td>80〜180</td>
+                <td>125</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-350R Standard Rose</strong></td>
+                <td>80〜180</td>
+                <td>125</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="cta-wrapper">
+    <div class="cta-catch">＼安心の公式ショップ／</div>
+    <a href="#" class="cta-button">LUMIFACE公式ショップ楽天市場店</a>
+</div>
+
+<!-- プレミアムケア -->
+<div class="guide-section bold">
+    <h4>本格ケア、集中ケア、プロ仕様</h4>
+    <h3>プレミアムケアのあなたには・・・</h3>
+
+    <table class="model-table">
+        <thead>
+            <tr>
+                <th>型番</th>
+                <th>出力（mA）</th>
+                <th>重量（g）</th>
+                <th>パワー</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>LF-500 Pro Silver</strong></td>
+                <td>100〜200</td>
+                <td>150</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-500G Pro Gold</strong></td>
+                <td>100〜200</td>
+                <td>150</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-500B Pro Black</strong></td>
+                <td>100〜200</td>
+                <td>150</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-500RG Pro RoseGold</strong></td>
+                <td>100〜200</td>
+                <td>150</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-550 Pro Max</strong></td>
+                <td>100〜250</td>
+                <td>160</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>LF-550W Pro Max White</strong></td>
+                <td>100〜250</td>
+                <td>160</td>
+                <td>
+                    <div class="volume-bar">
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                        <span class="filled"></span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="cta-wrapper">
+    <div class="cta-catch">＼安心の公式ショップ／</div>
+    <a href="#" class="cta-button">LUMIFACE公式ショップ楽天市場店</a>
+</div>
+
+</div><!-- /.container -->
+
+<footer>
+    <a href="#">特定商取引法に基づく表記</a>
+    <p>© 2026 SAMPLE PORTFOLIO.</p>
+</footer>
+
+</body>
+</html>
