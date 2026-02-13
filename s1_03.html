@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>【多機能美顔器】徹底比較 - スワイプLP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fff;
+      overflow: hidden;
+      font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* スライド表示エリア */
+    .slide-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #f8f4f0;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .slide-viewport {
+      width: 100%;
+      height: 100%;
+      max-width: 600px;
+      aspect-ratio: 1080 / 1350;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 769px) {
+      .slide-viewport {
+        height: 100vh;
+        width: auto;
+      }
+    }
+
+    /* 各スライド */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      padding: 20px;
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .slide.slide-out-left {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    .slide.slide-out-right {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    /* スライド共通スタイル */
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    /* タイトルスライド */
+    .slide-title {
+      background: linear-gradient(135deg, #f3aca9 0%, #ffddb4 100%);
+      text-align: center;
+      color: #fff;
+    }
+
+    .slide-title .slide-content {
+      align-items: center;
+      gap: 20px;
+    }
+
+    .slide-title h1 {
+      font-size: clamp(24px, 5vw, 42px);
+      line-height: 1.4;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .slide-title .subtitle {
+      font-size: clamp(14px, 3vw, 20px);
+      opacity: 0.9;
+      border: 2px solid rgba(255,255,255,0.6);
+      padding: 8px 20px;
+      border-radius: 30px;
+    }
+
+    .slide-title .badge {
+      background: #fff;
+      color: #e60033;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: clamp(11px, 2.5vw, 16px);
+      font-weight: bold;
+    }
+
+    /* コンテンツスライド共通 */
+    .slide-white {
+      background: #fff;
+    }
+
+    .slide-white .slide-header {
+      background: #f3aca9;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: clamp(14px, 3.5vw, 22px);
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .slide-white .slide-header::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 25px;
+      border-width: 8px 8px 0 8px;
+      border-style: solid;
+      border-color: #f3aca9 transparent transparent transparent;
+    }
+
+    /* お悩みスライド */
+    .concern-item {
+      background: #FDF2F2;
+      padding: 10px 14px;
+      margin: 6px 0;
+      border-radius: 8px;
+      font-size: clamp(12px, 2.8vw, 17px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .concern-item::before {
+      content: "😟";
+      font-size: 1.2em;
+      flex-shrink: 0;
+    }
+
+    /* 吹き出し */
+    .balloon-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 8px 0;
+    }
+
+    .balloon-icon {
+      width: 40px;
+      height: 40px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #888;
+    }
+
+    .balloon-text {
+      background: #ffddb4;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: clamp(12px, 2.8vw, 16px);
+      position: relative;
+      flex: 1;
+    }
+
+    .balloon-text::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 14px;
+      border-width: 6px 10px 6px 0;
+      border-style: solid;
+      border-color: transparent #ffddb4 transparent transparent;
+    }
+
+    /* ポイントテキスト */
+    .key-point {
+      background: linear-gradient(transparent 60%, #fff799 60%);
+      font-weight: bold;
+      font-size: clamp(13px, 3vw, 18px);
+    }
+
+    /* 比較表スライド */
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: clamp(10px, 2.2vw, 14px);
+      margin: 10px 0;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      border: 1px solid #eee;
+      padding: 6px 4px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .mini-table thead th {
+      background: #87CEEB;
+      color: #fff;
+      font-weight: bold;
+      font-size: clamp(9px, 2vw, 13px);
+    }
+
+    .mini-table .recommend {
+      background: #fff0f5;
+    }
+
+    .mini-table tbody th {
+      background: #f5f5f5;
+      text-align: left;
+      font-weight: normal;
+      width: 60px;
+    }
+
+    .eval-good { color: #32cd32; font-weight: bold; }
+    .eval-bad { color: #ff69b4; }
+
+    /* 口コミスライド */
+    .review-card {
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 6px 0;
+      font-size: clamp(11px, 2.6vw, 15px);
+      line-height: 1.6;
+    }
+
+    .review-card.good {
+      background: #F9FCFF;
+      border: 2px solid #90b5ce;
+    }
+
+    .review-card.bad {
+      background: #FFFAFC;
+      border: 2px solid #f3aca9;
+    }
+
+    .review-meta {
+      font-size: 0.8em;
+      color: #888;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .review-label {
+      font-size: clamp(12px, 2.8vw, 16px);
+      font-weight: bold;
+      margin-bottom: 8px;
+      padding-left: 8px;
+      border-left: 3px solid #f3aca9;
+    }
+
+    /* 総評スライド */
+    .summary-card {
+      background: #f5f5f5;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 8px 0;
+    }
+
+    .summary-card li {
+      margin: 6px 0;
+      font-size: clamp(12px, 2.8vw, 16px);
+      line-height: 1.6;
+    }
+
+    .titled-box-slide {
+      border: 2px solid #c3d825;
+      border-radius: 8px;
+      padding: 18px 14px 12px;
+      margin: 10px 0;
+      position: relative;
+    }
+
+    .titled-box-slide .box-label {
+      position: absolute;
+      top: -10px;
+      left: 12px;
+      background: #c3d825;
+      color: #fff;
+      padding: 2px 12px;
+      font-size: clamp(10px, 2.2vw, 13px);
+      font-weight: bold;
+      border-radius: 3px;
+    }
+
+    .titled-box-slide li {
+      margin: 5px 0;
+      font-size: clamp(11px, 2.6vw, 15px);
+      line-height: 1.5;
+    }
+
+    /* シリーズ選びスライド */
+    .care-type {
+      background: #ffddb4;
+      padding: 8px 14px;
+      border-radius: 8px;
+      margin: 6px 0;
+      font-size: clamp(12px, 2.8vw, 16px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .care-type .care-icon {
+      font-size: 1.3em;
+    }
+
+    .care-type .care-label {
+      font-weight: bold;
+    }
+
+    .care-type .care-desc {
+      font-size: 0.85em;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    /* CTAスライド */
+    .slide-cta {
+      background: linear-gradient(135deg, #f3aca9 0%, #e60033 100%);
+      text-align: center;
+      color: #fff;
+    }
+
+    .slide-cta .slide-content {
+      align-items: center;
+      gap: 20px;
+    }
+
+    .slide-cta h2 {
+      font-size: clamp(18px, 4.5vw, 32px);
+      line-height: 1.4;
+    }
+
+    .slide-cta .cta-button {
+      display: inline-block;
+      background: #fff;
+      color: #e60033;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: clamp(14px, 3.5vw, 22px);
+      font-weight: bold;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .slide-cta .cta-button:hover {
+      transform: scale(1.05);
+    }
+
+    .slide-cta .cta-note {
+      font-size: clamp(11px, 2.5vw, 15px);
+      opacity: 0.85;
+    }
+
+    /* フローティング三角矢印 */
+    .nav-triangle {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      cursor: pointer;
+      z-index: 100;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+
+    .nav-triangle:hover { opacity: 0.8; }
+
+    .nav-triangle.disabled {
+      opacity: 0.15;
+      cursor: not-allowed;
+    }
+
+    .nav-triangle.prev {
+      left: 20px;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-right: 20px solid #888;
+    }
+
+    .nav-triangle.next {
+      right: 20px;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 20px solid #888;
+    }
+
+    @media (max-width: 768px) {
+      .nav-triangle.prev {
+        left: 8px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 14px solid #888;
+      }
+      .nav-triangle.next {
+        right: 8px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 14px solid #888;
+      }
+    }
+
+    /* コントロール */
+    .controls {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .dots {
+      display: flex;
+      gap: 12px;
+      padding: 10px 20px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #333;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: #e60033;
+      transform: scale(1.2);
+    }
+
+    .dot:hover { background: #666; }
+    .dot.active:hover { background: #e60033; }
+
+    .slide-info {
+      color: #333;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        bottom: 5px;
+        gap: 2px;
+      }
+      .dots {
+        gap: 8px;
+        padding: 8px 15px 5px 15px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+      }
+      .slide-info { font-size: 12px; }
+    }
+
+    .swipe-hint {
+      position: fixed;
+      bottom: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(0,0,0,0.4);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+      transition: opacity 0.3s;
+    }
+
+    .swipe-hint.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .swipe-hint svg {
+      animation: swipeHint 2s ease-in-out infinite;
+    }
+
+    @keyframes swipeHint {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .swipe-hint { bottom: 70px; }
+    }
+
+    .keyboard-hint {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      color: rgba(0,0,0,0.4);
+      font-size: 12px;
+      text-align: right;
+      z-index: 100;
+    }
+
+    @media (max-width: 768px) {
+      .keyboard-hint { display: none; }
+    }
+
+    /* ポートフォリオラベル */
+    .portfolio-label {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 0.65em;
+      z-index: 1000;
+    }
+
+    /* プレースホルダ画像 */
+    .img-placeholder {
+      width: 80px;
+      height: 80px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6em;
+      color: #888;
+      flex-shrink: 0;
+    }
+
+    .img-placeholder.large {
+      width: 100%;
+      height: 120px;
+      border-radius: 10px;
+      margin: 8px 0;
+    }
+
+    /* スライド内の段落テキスト */
+    .slide-text {
+      font-size: clamp(12px, 2.8vw, 17px);
+      line-height: 1.7;
+      color: #333;
+      margin: 8px 0;
+    }
+
+    .slide-text strong {
+      color: #e60033;
+    }
+  </style>
+</head>
+<body>
+
+<div class="portfolio-label">※ポートフォリオ用ダミーLP（スワイプ版）</div>
+
+<div class="container">
+  <div class="slide-wrapper" id="slideWrapper">
+    <div class="slide-viewport">
+
+      <!-- スライド1: タイトル -->
+      <div class="slide slide-title active" data-index="0">
+        <div class="slide-content">
+          <div class="badge">徹底比較 2026年最新版</div>
+          <h1>多機能美顔器<br>失敗しない選び方</h1>
+          <div class="subtitle">利用者の口コミから見えた真実</div>
+        </div>
+      </div>
+
+      <!-- スライド2: お悩み -->
+      <div class="slide slide-white" data-index="1">
+        <div class="slide-content">
+          <div class="slide-header">こんなお悩みありませんか？</div>
+          <div class="concern-item">本当に自宅ケアでエステ級の効果が得られるの？</div>
+          <div class="concern-item">自分の肌悩みに合うものはあるの？</div>
+          <div class="concern-item">操作が難しそうだけど、本当に続けられるの？</div>
+          <div class="balloon-box" style="margin-top: 12px;">
+            <div class="balloon-icon">USER</div>
+            <div class="balloon-text">使っても全然効果が感じられない…</div>
+          </div>
+          <div class="balloon-box">
+            <div class="balloon-icon">USER</div>
+            <div class="balloon-text">毎日使ってたら肌がワントーン明るくなった！</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド3: 答え -->
+      <div class="slide slide-white" data-index="2">
+        <div class="slide-content">
+          <div class="slide-header">この差はどこから？</div>
+          <div class="slide-text">
+            <p>ネガティブな感想を言っている人は<strong>選び方を間違えているだけ</strong>の可能性が高いです。</p>
+          </div>
+          <div class="slide-text" style="margin-top: 12px;">
+            <p>逆の言い方をすると、</p>
+            <p><span class="key-point">「自分に合った多機能美顔器の選び方」さえ押さえておけば、これほど時短できて便利なアイテムはない</span></p>
+            <p>ということです。</p>
+          </div>
+          <div class="slide-text" style="margin-top: 12px;">
+            <p>このページでは、<strong>多機能美顔器選びで失敗しないための選び方</strong>について説明します。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド4: 比較表 -->
+      <div class="slide slide-white" data-index="3">
+        <div class="slide-content">
+          <div class="slide-header">人気の美顔器3種類を比較！</div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="recommend">LUMIFACE Pro</th>
+                <th>マルチフェイス EX</th>
+                <th>ビューティーリフト 5in1</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>価格</th>
+                <td class="recommend">29,800円</td>
+                <td>24,800円</td>
+                <td>35,000円</td>
+              </tr>
+              <tr>
+                <th>モード</th>
+                <td class="recommend"><span class="eval-good">6種 ◎</span></td>
+                <td>4種 ○</td>
+                <td><span class="eval-bad">5種 △</span></td>
+              </tr>
+              <tr>
+                <th>素材</th>
+                <td class="recommend">医療グレード<br>チタン合金</td>
+                <td>記載なし</td>
+                <td>記載なし</td>
+              </tr>
+              <tr>
+                <th>サポート</th>
+                <td class="recommend"><span class="eval-good">あり ◎</span></td>
+                <td><span class="eval-bad">なし ✕</span></td>
+                <td><span class="eval-bad">なし ✕</span></td>
+              </tr>
+              <tr>
+                <th>保証</th>
+                <td class="recommend">2年</td>
+                <td>1年</td>
+                <td>6ヶ月</td>
+              </tr>
+              <tr>
+                <th>購入</th>
+                <td class="recommend" style="color:#1558d6; text-decoration:underline;">楽天市場</td>
+                <td style="color:#1558d6; text-decoration:underline;">楽天市場</td>
+                <td style="color:#1558d6; text-decoration:underline;">楽天市場</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- スライド5: おすすめ -->
+      <div class="slide slide-white" data-index="4">
+        <div class="slide-content">
+          <div class="slide-header">おすすめはNo.1の「LUMIFACE」</div>
+          <div class="img-placeholder large">[商品画像]</div>
+          <div class="slide-text">
+            <p>多機能美顔器と言えばやっぱり「LUMIFACE」。</p>
+            <p>知名度、利用者数、評判ともに<strong>No.1</strong>の定番商品です。</p>
+          </div>
+          <div class="slide-text" style="margin-top: 8px;">
+            <p>気になる口コミを見ていきましょう。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド6: 良い口コミ -->
+      <div class="slide slide-white" data-index="5">
+        <div class="slide-content">
+          <div class="review-label">良い口コミ</div>
+          <div class="review-card good">
+            <p>「簡単に操作でき、片付けも楽でした。慣れるまで振動の強さに違和感がありましたが、すぐに慣れました。」</p>
+            <p class="review-meta">（40代・女性）</p>
+          </div>
+          <div class="review-card good">
+            <p>「普段エステに行けない私でも自宅で手軽にケアできました！肌のハリが出て嬉しいです。」</p>
+            <p class="review-meta">（40代・女性）</p>
+          </div>
+          <div class="review-card good">
+            <p>「パックをしなくても美容液がしっかり浸透するので、スキンケアが時短できます！」</p>
+            <p class="review-meta">（40代・女性）</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド7: 悪い口コミ -->
+      <div class="slide slide-white" data-index="6">
+        <div class="slide-content">
+          <div class="review-label">悪い口コミ</div>
+          <div class="review-card bad">
+            <p>「慣れるまでは適切なモード選びが難しい。でも練習すれば上手くできそう。」</p>
+            <p class="review-meta">（50代・女性）</p>
+          </div>
+          <div class="review-card bad">
+            <p>「敏感肌なので最初は刺激を感じることがあるので、弱めモードで使っています。」</p>
+            <p class="review-meta">（40代・女性）</p>
+          </div>
+          <div class="review-card bad">
+            <p>「思っていたより多機能だったので、もう少しシンプルなものでも良かったかも。」</p>
+            <p class="review-meta">（40代・女性）</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド8: 総評 -->
+      <div class="slide slide-white" data-index="7">
+        <div class="slide-content">
+          <div class="slide-header">総評</div>
+          <div class="slide-text">
+            <p>LUMIFACEの多機能美顔器は、操作の手軽さと自然な効果で<strong>高評価</strong>を得ています。</p>
+          </div>
+          <div class="titled-box-slide">
+            <span class="box-label">購入を検討する際の注意ポイント</span>
+            <ul style="padding-left: 20px; margin-top: 4px;">
+              <li>操作には少し練習が必要だけど、慣れれば簡単！</li>
+              <li>敏感肌の方は、まず弱めモードから始めると安心！</li>
+              <li>乾燥が気になる日は保湿ケアを併用！</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド9: シリーズ選び -->
+      <div class="slide slide-white" data-index="8">
+        <div class="slide-content">
+          <div class="slide-header">ピッタリなシリーズは？</div>
+          <div class="balloon-box">
+            <div class="balloon-icon">USER</div>
+            <div class="balloon-text">パワーが強すぎて肌に合わなかった…</div>
+          </div>
+          <div class="slide-text" style="margin: 8px 0;">
+            <p>という失敗をしないためには、<strong>モードやパワーの違い</strong>を把握しておくことが重要。</p>
+          </div>
+          <div class="care-type">
+            <span class="care-icon">🌸</span>
+            <div>
+              <div class="care-label">ベーシックケア</div>
+              <div class="care-desc">日常使い・敏感肌・初心者向け</div>
+            </div>
+          </div>
+          <div class="care-type">
+            <span class="care-icon">✨</span>
+            <div>
+              <div class="care-label">スタンダードケア</div>
+              <div class="care-desc">週末ケア・エイジングケア・バランス重視</div>
+            </div>
+          </div>
+          <div class="care-type">
+            <span class="care-icon">💎</span>
+            <div>
+              <div class="care-label">プレミアムケア</div>
+              <div class="care-desc">本格ケア・集中ケア・プロ仕様</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド10: シリーズ表 -->
+      <div class="slide slide-white" data-index="9">
+        <div class="slide-content">
+          <div class="slide-header">シリーズ一覧</div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>タイプ</th>
+                <th>型番</th>
+                <th>出力</th>
+                <th>パワー</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th rowspan="2" style="background:#fce4ec;">ベーシック</th>
+                <td>LF-100 Lite White</td>
+                <td>50〜100mA</td>
+                <td>★☆☆☆☆</td>
+              </tr>
+              <tr>
+                <td>LF-100P Lite Pink</td>
+                <td>50〜100mA</td>
+                <td>★☆☆☆☆</td>
+              </tr>
+              <tr>
+                <th rowspan="2" style="background:#fff3e0;">スタンダード</th>
+                <td>LF-300 Standard</td>
+                <td>80〜150mA</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <td>LF-350 Plus</td>
+                <td>80〜180mA</td>
+                <td>★★★☆☆</td>
+              </tr>
+              <tr>
+                <th rowspan="2" style="background:#e8eaf6;">プレミアム</th>
+                <td>LF-500 Pro</td>
+                <td>100〜200mA</td>
+                <td>★★★★★</td>
+              </tr>
+              <tr>
+                <td>LF-550 Pro Max</td>
+                <td>100〜250mA</td>
+                <td>★★★★★</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="slide-text" style="margin-top: 8px; text-align: center;">
+            <p><span class="key-point">自分のケアタイプに合った型番を選びましょう</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- スライド11: CTAスライド -->
+      <div class="slide slide-cta" data-index="10">
+        <div class="slide-content">
+          <h2>あなたにピッタリの<br>LUMIFACEを見つけよう</h2>
+          <p class="cta-note">＼初心者サポート付き。安心の公式ショップ／</p>
+          <a href="#" class="cta-button">LUMIFACE公式ショップ<br>楽天市場店</a>
+          <p class="cta-note">類似品・模倣品が多いので<br>必ず公式から購入してください</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- フローティング三角矢印 -->
+  <div class="nav-triangle prev disabled" id="prevTriangle"></div>
+  <div class="nav-triangle next" id="nextTriangle"></div>
+
+  <div class="controls">
+    <div class="dots" id="dots"></div>
+    <div class="slide-info" id="slideInfo">1 / 11</div>
+  </div>
+</div>
+
+<div class="swipe-hint" id="swipeHint">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>
+  スワイプまたは矢印キーで操作
+</div>
+
+<div class="keyboard-hint">
+  ← → キーで移動
+</div>
+
+<script>
+  const slideElements = document.querySelectorAll('.slide');
+  const totalSlides = slideElements.length;
+  let currentSlide = 0;
+  let isAnimating = false;
+
+  const slideWrapper = document.getElementById('slideWrapper');
+  const dotsContainer = document.getElementById('dots');
+  const slideInfo = document.getElementById('slideInfo');
+  const prevTriangle = document.getElementById('prevTriangle');
+  const nextTriangle = document.getElementById('nextTriangle');
+  const swipeHint = document.getElementById('swipeHint');
+
+  // ドット生成
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.dataset.slide = i;
+    dot.addEventListener('click', () => {
+      const direction = i > currentSlide ? 1 : -1;
+      updateSlide(i, direction);
+    });
+    dotsContainer.appendChild(dot);
+  }
+  const dots = document.querySelectorAll('.dot');
+
+  function updateUI() {
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+    slideInfo.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    prevTriangle.classList.toggle('disabled', currentSlide === 0);
+    nextTriangle.classList.toggle('disabled', currentSlide === totalSlides - 1);
+
+    if (currentSlide === 0) {
+      swipeHint.classList.remove('hidden');
+    } else {
+      swipeHint.classList.add('hidden');
+    }
+  }
+
+  function updateSlide(index, direction) {
+    if (index < 0 || index >= totalSlides || isAnimating) return;
+    if (index === currentSlide) return;
+
+    isAnimating = true;
+    const oldSlide = slideElements[currentSlide];
+    const newSlide = slideElements[index];
+
+    const outClass = direction > 0 ? 'slide-out-left' : 'slide-out-right';
+
+    oldSlide.classList.add(outClass);
+
+    setTimeout(() => {
+      oldSlide.classList.remove('active', outClass);
+      newSlide.style.transform = direction > 0 ? 'translateX(100%)' : 'translateX(-100%)';
+      newSlide.style.opacity = '0';
+      newSlide.classList.add('active');
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          newSlide.style.transform = '';
+          newSlide.style.opacity = '';
+          currentSlide = index;
+          updateUI();
+
+          setTimeout(() => {
+            isAnimating = false;
+          }, 300);
+        });
+      });
+    }, 300);
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides - 1) {
+      updateSlide(currentSlide + 1, 1);
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      updateSlide(currentSlide - 1, -1);
+    }
+  }
+
+  prevTriangle.addEventListener('click', prevSlide);
+  nextTriangle.addEventListener('click', nextSlide);
+
+  // キーボード操作
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      prevSlide();
+    }
+  });
+
+  // タッチスワイプ
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  slideWrapper.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  slideWrapper.addEventListener('touchend', (e) => {
+    const diffX = touchStartX - e.changedTouches[0].screenX;
+    const diffY = touchStartY - e.changedTouches[0].screenY;
+
+    if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) nextSlide();
+      else prevSlide();
+    }
+  }, { passive: true });
+
+  // マウスドラッグ
+  let isDragging = false;
+  let dragStartX = 0;
+
+  slideWrapper.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragStartX = e.clientX;
+    slideWrapper.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mouseup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    slideWrapper.style.cursor = 'grab';
+
+    const diffX = dragStartX - e.clientX;
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0) nextSlide();
+      else prevSlide();
+    }
+  });
+
+  // ドットスクラビング
+  let isScrubbing = false;
+
+  dotsContainer.addEventListener('touchstart', (e) => {
+    isScrubbing = true;
+    const touch = e.touches[0];
+    const dotEl = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (dotEl && dotEl.classList.contains('dot')) {
+      jumpToSlide(parseInt(dotEl.dataset.slide));
+    }
+  }, { passive: true });
+
+  dotsContainer.addEventListener('touchmove', (e) => {
+    if (!isScrubbing) return;
+    const touch = e.touches[0];
+    const dotEl = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (dotEl && dotEl.classList.contains('dot')) {
+      jumpToSlide(parseInt(dotEl.dataset.slide));
+    }
+  }, { passive: true });
+
+  dotsContainer.addEventListener('touchend', () => {
+    isScrubbing = false;
+  }, { passive: true });
+
+  function jumpToSlide(index) {
+    if (index < 0 || index >= totalSlides || index === currentSlide) return;
+    slideElements[currentSlide].classList.remove('active');
+    slideElements[index].classList.add('active');
+    slideElements[index].style.transform = '';
+    slideElements[index].style.opacity = '';
+    currentSlide = index;
+    updateUI();
+  }
+
+  slideWrapper.style.cursor = 'grab';
+  updateUI();
+</script>
+</body>
+</html>
